@@ -16,6 +16,11 @@ namespace Data.Repository
             return _calcContext.CalcHistories;
         }
 
+        public IQueryable<MathOperator> GetMathOperators()
+        {
+            return _calcContext.MathOperators;
+        }
+
         public void InsertToCalcHistory(CalcHistory calcHistory)
         {
             _calcContext.CalcHistories.Add(calcHistory);

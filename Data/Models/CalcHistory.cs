@@ -3,9 +3,8 @@
     public class CalcHistory
     {
         public int Id { get; set; }
-        public decimal FirstNumber { get; set; }
-        public decimal SecondNumber { get; set; }
+        public string MathFormula { get; set; }
+        public decimal Result { get; set; }
 
-        public virtual MathOperator MathOperator { get; set; }
     }
 }
