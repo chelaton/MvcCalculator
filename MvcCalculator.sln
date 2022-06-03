@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcCalculator", "MvcCalculator\MvcCalculator.csproj", "{F5D0C308-96BA-49FB-BD9F-3CCD622C5765}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{36574914-4D1F-466D-BB80-5C50368F862D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{4B2CB3FC-46C7-47DF-90F9-D7C65861A847}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5D0C308-96BA-49FB-BD9F-3CCD622C5765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5D0C308-96BA-49FB-BD9F-3CCD622C5765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5D0C308-96BA-49FB-BD9F-3CCD622C5765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5D0C308-96BA-49FB-BD9F-3CCD622C5765}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36574914-4D1F-466D-BB80-5C50368F862D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36574914-4D1F-466D-BB80-5C50368F862D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36574914-4D1F-466D-BB80-5C50368F862D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36574914-4D1F-466D-BB80-5C50368F862D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B2CB3FC-46C7-47DF-90F9-D7C65861A847}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B2CB3FC-46C7-47DF-90F9-D7C65861A847}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B2CB3FC-46C7-47DF-90F9-D7C65861A847}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B2CB3FC-46C7-47DF-90F9-D7C65861A847}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA323269-F5C1-4849-8809-E25485DC2B6A}
+	EndGlobalSection
+EndGlobal
