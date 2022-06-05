@@ -28,6 +28,7 @@ function calculate() {
             if (response != null) {
                 //alert("result : " + response);
                 document.getElementById("result").value = response;
+                getCalcHistory();
             } else {
                 alert("Something went wrong");
             }
@@ -42,7 +43,6 @@ function calculate() {
         }
     });  
     document.getElementById("result").value = result;
-    getCalcHistory();
 }
 
 function getCalcHistory() {
