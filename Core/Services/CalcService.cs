@@ -1,4 +1,5 @@
-﻿using Data.Repository;
+﻿using Data.Models;
+using Data.Repository;
 
 namespace Core.Services
 {
@@ -15,11 +16,12 @@ namespace Core.Services
         {
             if (mathFormula.Length > 0)
             {
-                var formulaParts = SplitFormulaToParts(mathFormula);
+                var mathOperators = _calcRepository.GetMathOperators().ToList();
+                var formulaParts = SplitFormulaToParts(mathFormula, mathOperators);
                 Validate(formulaParts);
 
 
-                var mathOperators = _calcRepository.GetMathOperators().ToList();
+
 
                 if (formulaParts.Count() == 3) //most basic example
                 {
@@ -70,10 +72,21 @@ namespace Core.Services
             return null;
         }
 
-        private string[]? SplitFormulaToParts(string mathFormula)
+        private string[]? SplitFormulaToParts(string mathFormula, List<MathOperator> mathOperators)
         {
-
-            var parts = mathFormula.Split(' ');
+            mathFormula.Replace(" ", "");
+            string mathFormulaWithSpacers = "";
+            for (int i = 0; i < mathFormula.Length; i++)
+            {   
+                var oneChar = mathFormula[i].ToString();
+                if (mathOperators.Any(p => p.Symbol.Equals(oneChar)))
+                {
+                    mathFormulaWithSpacers += ";"+ oneChar+";";
+                    continue;
+                }
+                mathFormulaWithSpacers += oneChar;
+            }
+            var parts = mathFormulaWithSpacers.Split(';');
             return parts;
         }
 
