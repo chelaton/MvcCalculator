@@ -1,3 +1,4 @@
+using Core.Services;
 using Data;
 using Data.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ builder.Services.AddDbContext<CalcContext>(options =>
   options.UseSqlServer(builder.Configuration.GetConnectionString("CalculatorDb")));
 
 builder.Services.AddScoped<ICalcRepository, CalcRepository>();
+builder.Services.AddScoped<ICalcService, CalcService>();
 
 var app = builder.Build();
 

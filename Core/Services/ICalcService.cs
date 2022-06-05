@@ -1,6 +1,6 @@
 ﻿namespace Core.Services
 {
-    public interface IMathService
+    public interface ICalcService
     {
         decimal? GetMathResult(string mathFormula);
     }

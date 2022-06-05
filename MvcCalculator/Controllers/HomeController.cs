@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Core.Services;
+using Microsoft.AspNetCore.Mvc;
 using MvcCalculator.Models;
 using System.Diagnostics;
 
@@ -7,15 +8,33 @@ namespace MvcCalculator.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ICalcService _calcService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICalcService calcService)
         {
             _logger = logger;
+            _calcService = calcService;
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public string Calculate(string data)
+        {
+            string result;
+            try
+            {
+                result = _calcService.GetMathResult(data).ToString();
+            }
+            catch (Exception ex)
+            {
+                result= ex.Message.ToString();
+            }
+
+            return result;
         }
 
         public IActionResult Privacy()

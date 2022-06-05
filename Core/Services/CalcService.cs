@@ -2,11 +2,11 @@
 
 namespace Core.Services
 {
-    public class MathService : IMathService
+    public class CalcService : ICalcService
     {
         private readonly ICalcRepository _calcRepository;
 
-        public MathService(CalcRepository calcRepository)
+        public CalcService(ICalcRepository calcRepository)
         {
             _calcRepository = calcRepository;
         }
@@ -15,7 +15,7 @@ namespace Core.Services
         {
             if (mathFormula.Length > 0)
             {
-                var formulaParts = mathFormula.Split(";");
+                var formulaParts = SplitFormulaToParts(mathFormula);
                 Validate(formulaParts);
 
 
@@ -68,6 +68,13 @@ namespace Core.Services
                 }
             }
             return null;
+        }
+
+        private string[]? SplitFormulaToParts(string mathFormula)
+        {
+
+            var parts = mathFormula.Split(' ');
+            return parts;
         }
 
         private void Validate(string[] formulaParts)
