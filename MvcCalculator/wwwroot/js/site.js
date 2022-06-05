@@ -24,18 +24,18 @@ function calculate() {
         dataType: "json",
         success: function (response) {
             if (response != null) {
-                alert("result : " + response);
+                //alert("result : " + response);
                 document.getElementById("result").value = response;
             } else {
                 alert("Something went wrong");
             }
         },
         failure: function (response) {
-            alert("failure" + response.responseText);
+            //alert("failure" + response.responseText);
             document.getElementById("result").value = response.responseText;
         },
         error: function (response) {
-            alert("Error" + response.responseText);
+            //alert("Error" + response.responseText);
             document.getElementById("result").value = response.responseText;
         }
     });  

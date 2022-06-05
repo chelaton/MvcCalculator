@@ -20,9 +20,6 @@ namespace Core.Services
                 var formulaParts = SplitFormulaToParts(mathFormula, mathOperators);
                 Validate(formulaParts);
 
-
-
-
                 if (formulaParts.Count() == 3) //most basic example
                 {
                     if (!Decimal.TryParse(formulaParts[0], out decimal firstNumber))
