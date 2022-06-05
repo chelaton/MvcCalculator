@@ -42,10 +42,15 @@ function calculate() {
         }
     });  
     document.getElementById("result").value = result;
+    getCalcHistory();
 }
 
 function getCalcHistory() {
+    $("div.tableHistory").find('table tbody tr').each(function () {
 
+        $(this).remove()
+
+    })
     $.ajax({
         type: "GET",
         url: "/Home/GetCalcHistory",
@@ -61,4 +66,6 @@ function getCalcHistory() {
         }
     });
 }
+
+
 
