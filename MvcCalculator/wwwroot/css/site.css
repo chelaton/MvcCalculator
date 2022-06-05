@@ -18,13 +18,16 @@ body {
     margin-bottom: 60px;
 }
 
-
+.calcWithHistory {
+    display: inline-grid;
+    grid-template-columns: auto auto;
+}
 
 .calculator {
 /*    padding: 10px;*/
     height: 380px;
     width: 500px;
-    margin: auto;
+    /*margin: auto;*/
 }
 
 .display-box {
@@ -34,6 +37,7 @@ body {
     border-radius: 5px;
     width: 92%;
     height: 65%;
+    text-align: right;
 }
 
 .button {

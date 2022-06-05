@@ -1,4 +1,5 @@
-﻿using Core.Services;
+﻿using Core.DTOs;
+using Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using MvcCalculator.Models;
 using System.Diagnostics;
@@ -35,6 +36,13 @@ namespace MvcCalculator.Controllers
             }
 
             return result;
+        }
+
+        [HttpGet]
+        public List<string> GetCalcHistory()
+        {
+
+            return _calcService.GetCalcHistories().ToList();
         }
 
         public IActionResult Privacy()

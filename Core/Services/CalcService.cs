@@ -1,4 +1,5 @@
-﻿using Data.Models;
+﻿using Core.DTOs;
+using Data.Models;
 using Data.Repository;
 
 namespace Core.Services
@@ -14,10 +15,17 @@ namespace Core.Services
 
         public decimal? GetMathResult(string mathFormula)
         {
+            var calcHistoryLog = new CalcHistory();
             if (mathFormula.Length > 0)
             {
                 var mathOperators = _calcRepository.GetMathOperators().ToList();
                 var formulaParts = SplitFormulaToParts(mathFormula, mathOperators);
+
+                foreach (var item in formulaParts)
+                {
+                    calcHistoryLog.MathFormula += item;
+                }
+
                 Validate(formulaParts);
 
                 if (formulaParts.Count() == 3) //most basic example
@@ -36,16 +44,20 @@ namespace Core.Services
                     if (mathOperators.Any(p => p.Symbol.Equals(formulaParts[1])))
                     {
                         var operationName = mathOperators.Where(p => p.Symbol.Equals(formulaParts[1])).Select(s => s.OperationName).FirstOrDefault();
+                        decimal result = 0;
                         switch (operationName)
                         {
                             case "Scitani":
-                                return firstNumber + secondNumber;
+                                result= firstNumber + secondNumber;
+                                break;
 
                             case "Odcitani":
-                                return firstNumber - secondNumber;
+                                result = firstNumber - secondNumber;
+                                break;
 
                             case "Nasobeni":
-                                return firstNumber * secondNumber;
+                                result = firstNumber * secondNumber;
+                                break;
 
                             case "Deleni":
                                 if (secondNumber == 0)
@@ -53,10 +65,15 @@ namespace Core.Services
                                     // call error
                                     throw new Exception("You cannot divide by 0");
                                 }
-                                return firstNumber / secondNumber;
+                                result = firstNumber / secondNumber;
+                                break;
                             default:
                                 break;
                         }
+                        calcHistoryLog.Result=result;
+                        _calcRepository.InsertToCalcHistory(calcHistoryLog);
+                        _calcRepository.SaveChanges();
+                        return result;
                     }
                     else
                     {
@@ -65,10 +82,25 @@ namespace Core.Services
                     }
 
                 }
+                else
+                {
+                    throw new Exception("Sorry I dont know how to count this.");
+                }
             }
             return null;
         }
 
+        public IEnumerable<string> GetCalcHistories()
+        {
+            var calcHistoryList = _calcRepository.GetCalcHistories().OrderByDescending(p => p.Id).Take(10).DefaultIfEmpty().ToList();
+            var calcHistoryStringList = new List<string>();
+            foreach (var item in calcHistoryList)
+            {
+                var oneHistory = item.MathFormula + " = " + item.Result;
+                calcHistoryStringList.Add(oneHistory);
+            }
+            return calcHistoryStringList;
+        }
         private string[]? SplitFormulaToParts(string mathFormula, List<MathOperator> mathOperators)
         {
             mathFormula.Replace(" ", "");
@@ -78,12 +110,12 @@ namespace Core.Services
                 var oneChar = mathFormula[i].ToString();
                 if (mathOperators.Any(p => p.Symbol.Equals(oneChar)))
                 {
-                    mathFormulaWithSpacers += ";"+ oneChar+";";
+                    mathFormulaWithSpacers += " "+ oneChar+" ";
                     continue;
                 }
                 mathFormulaWithSpacers += oneChar;
             }
-            var parts = mathFormulaWithSpacers.Split(';');
+            var parts = mathFormulaWithSpacers.Split(' ');
             return parts;
         }
 

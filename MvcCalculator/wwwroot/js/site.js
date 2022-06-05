@@ -3,6 +3,8 @@
 
 // Write your JavaScript code.
 
+
+
 function display(value) {
     document.getElementById("result").value += value;
 }
@@ -41,3 +43,22 @@ function calculate() {
     });  
     document.getElementById("result").value = result;
 }
+
+function getCalcHistory() {
+
+    $.ajax({
+        type: "GET",
+        url: "/Home/GetCalcHistory",
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+            for (var i = 0; i < data.length; i++) {
+                $("div.tableHistory").find('table tbody').append(`<tr> <td>${data[i]}</td> </tr>`);
+            }
+        },
+        error: function (er) {
+            console.log(er);
+        }
+    });
+}
+
